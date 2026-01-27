@@ -2716,7 +2716,8 @@ public boolean isUniqueVN(String vcNum, final String vcDate) {
     try {
         // Parse the input voucher date - handle multiple date formats
         Date voucherDate = parseVoucherDate(vcDate);
-        
+        LOGGER.info("---------------Fetch FY as per voucher date-----------------");
+		LOGGER.info(voucherDate.toString());
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Parsed voucher date: " + voucherDate);
         }
@@ -2735,7 +2736,8 @@ public boolean isUniqueVN(String vcNum, final String vcDate) {
             throw new ApplicationRuntimeException(
                 "No financial year found for the given voucher date: " + vcDate);
         }
-        
+        LOGGER.info("---------------After Fetch FY as per voucher date-----------------");
+
         Date fyStartDate = null;
         Date fyEndDate = null;
         
@@ -2760,7 +2762,8 @@ public boolean isUniqueVN(String vcNum, final String vcDate) {
                 .setParameter(1, fyStartDate)
                 .setParameter(2, fyEndDate);
         rs = pst.list();
-        
+        LOGGER.info("---------------Fetch VH as per voucher date-----------------");
+
         if (rs != null && !rs.isEmpty()) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Duplicate Voucher Number found: " + vcNum);
